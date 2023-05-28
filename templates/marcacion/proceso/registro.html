@@ -1,0 +1,42 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
+<div class="card-body">
+    <table class="table" id="tabla_marcaciones">
+      <thead>
+        <tr>
+            <th style="min-width: 140px;">Cedula</th>
+            <th style="min-width: 120px;">Nombre</th>
+            <th style="min-width: 120px;">Fecha Inicio</th>
+            <th style="min-width: 120px;">Hora Inicio</th>
+            <th style="min-width: 120px;">Fecha fin</th>
+            <th style="min-width: 120px;">Hora fin</th>
+        </tr>
+      </thead>
+    </table>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    var csrf_token = "{{ csrf_token }}"
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+        $.ajaxSetup({
+        csrf_token: csrf_token,
+        beforeSend: function (xhr, settings) {
+            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", settings.csrf_token)
+            }
+        }
+    })
+
+    const urlDatosEmpleado = "{% url 'datos_empleados' %}" 
+</script>
+<script src="{% static 'js/entrada_salida.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+
+<h3>Inicio</h3>
+{% if request.user.is_authenticated %}
+    <hr>
+    <h4>
+        {{ user.username | upper }}, bienvenido
+    </h4>
+    <div class="card-body" id="bloque-principal">
+        <div class="card">
+            <div class="row">
+                <div class="col-lg-6 justify-content-center d-flex">
+                   <button id="btn-entrada" type="button" class="btn btn-success">
+                        Entrada 
+                   </button>
+                </div>
+                <div class="col-lg-6 justify-content-center d-flex">
+                    <button id="btn-salida" type="button" class="btn btn-danger">
+                       Salida
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+{% endblock %}
+
+{% block javascript %}
+<script>
+    var csrf_token = "{{ csrf_token }}"
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+        $.ajaxSetup({
+        csrf_token: csrf_token,
+        beforeSend: function (xhr, settings) {
+            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", settings.csrf_token)
+            }
+        }
+    })
+
+    const urlPOST = "{% url 'marcar_entrada_salida' %}" 
+</script>
+<script src="{% static 'js/entrada_salida.js' %}"></script>
+{% endblock %}

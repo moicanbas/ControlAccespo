@@ -1,0 +1,29 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<h3>Inicio</h3>
+{% if request.user.is_authenticated %}
+    <hr>
+    <h4>
+        {{ user.username | upper }}, bienvenido
+    </h4>
+    <div class="card-body">
+        <div class="row">
+            <div class="card col-lg-6">
+                <a href="">
+                    <h6>marcar entrada</h6>
+                </a>
+            </div>
+            <div class="card col-lg-6">
+                <a href="">
+                    <h6>marcar salida</h6>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+
+
+{% endblock %}

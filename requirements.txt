@@ -1,0 +1,8 @@
+asgiref==3.6.0
+crispy-bootstrap5==0.7
+Django==4.2.1
+django-crispy-forms==2.0
+django-serverside-datatable==2.0.0
+Serverside-tables-django-framework==0.0.3
+sqlparse==0.4.4
+psycopg2-binary==2.9.3
